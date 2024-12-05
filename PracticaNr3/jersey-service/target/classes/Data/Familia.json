@@ -1,0 +1,92 @@
+[
+    {
+        "idFamilia": 1,
+        "apellidoFamilia": "Perez",
+        "direccion": "Loja",
+        "HCpdGnrd": false
+    },
+    {
+        "idFamilia": 2,
+        "apellidoFamilia": "Riofrio",
+        "direccion": "Catamayo",
+        "HCpdGnrd": false
+    },
+    {
+        "idFamilia": 3,
+        "apellidoFamilia": "Velez",
+        "direccion": "Loja",
+        "HCpdGnrd": true
+    },
+    {
+        "idFamilia": 4,
+        "apellidoFamilia": "Vidal",
+        "direccion": "Loja",
+        "HCpdGnrd": false
+    },
+    {
+        "idFamilia": 5,
+        "apellidoFamilia": "Veintimilla",
+        "direccion": "Catamayo",
+        "HCpdGnrd": false
+    },
+    {
+        "idFamilia": 6,
+        "apellidoFamilia": "Castillo",
+        "direccion": "Quito",
+        "HCpdGnrd": true
+    },
+    {
+        "idFamilia": 7,
+        "apellidoFamilia": "Moreno",
+        "direccion": "Cuenca",
+        "HCpdGnrd": false
+    },
+    {
+        "idFamilia": 8,
+        "apellidoFamilia": "Gonzalez",
+        "direccion": "Ambato",
+        "HCpdGnrd": true
+    },
+    {
+        "idFamilia": 9,
+        "apellidoFamilia": "Lopez",
+        "direccion": "Machala",
+        "HCpdGnrd": false
+    },
+    {
+        "idFamilia": 10,
+        "apellidoFamilia": "Sanchez",
+        "direccion": "Guayaquil",
+        "HCpdGnrd": true
+    },
+    {
+        "idFamilia": 11,
+        "apellidoFamilia": "Rodriguez",
+        "direccion": "Portoviejo",
+        "HCpdGnrd": false
+    },
+    {
+        "idFamilia": 12,
+        "apellidoFamilia": "Torres",
+        "direccion": "Loja",
+        "HCpdGnrd": true
+    },
+    {
+        "idFamilia": 13,
+        "apellidoFamilia": "Martinez",
+        "direccion": "Quito",
+        "HCpdGnrd": false
+    },
+    {
+        "idFamilia": 14,
+        "apellidoFamilia": "Fernandez",
+        "direccion": "Tulcan",
+        "HCpdGnrd": true
+    },
+    {
+        "idFamilia": 15,
+        "apellidoFamilia": "Jimenez",
+        "direccion": "Manta",
+        "HCpdGnrd": false
+    }
+]
