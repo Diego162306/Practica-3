@@ -3,22 +3,16 @@ package com.tercerotest.controller.tda.list;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.lang.reflect.Method;
-
+import com.tercerotest.controller.tda.list.LinkedList;
 import com.tercerotest.controller.excepcion.ListEmptyException;
 
-/**
- 
- **/
 public class LinkedList<E> {
     private Node<E> header;
     private Node<E> last;
     private Integer size;
-    public static Integer ASC = 1;
-    public static Integer DESC = 0;
+    public static Integer Ascendente = 1;
+    public static Integer Descendente = 0;
 
-    /**
-     * Clase que permite realizar una lista enlazada
-     **/
     public LinkedList() {
         this.header = null;
         this.last = null;
@@ -62,7 +56,7 @@ public class LinkedList<E> {
         addLast(info);
     }
 
-    // ********** GET */
+    //----------------GET------------// 
     private Node<E> getNode(Integer index) throws ListEmptyException, IndexOutOfBoundsException {
         if (isEmpty()) {
             throw new ListEmptyException("Error, List empty");
@@ -117,9 +111,8 @@ public class LinkedList<E> {
         }
 
     }
+    //----------------End Get------------//
 
-    /********* END GET */
-    /*** ADD BY POSITION */
     public void add(E info, Integer index) throws ListEmptyException, IndexOutOfBoundsException {
         if (isEmpty() || index.intValue() == 0) {
             addHeader(info);
@@ -135,7 +128,6 @@ public class LinkedList<E> {
         }
     }
 
-    /*** END BY POSITION */
     public void reset() {
         this.header = null;
         this.last = null;
@@ -176,6 +168,10 @@ public class LinkedList<E> {
         }
         return matrix;
     }
+    
+    public Node<E> getHeader(){
+        return header;
+    }
 
     public LinkedList<E> toList(E[] matrix) {
         reset();
@@ -195,7 +191,7 @@ public class LinkedList<E> {
         } else if (post == (size - 1)) {
             last.setInfo(data);
         } else {
-            // 2 5 6 9 --> 2
+            
             Node<E> search = header;
             Integer cont = 0;
             while (cont < post) {
@@ -208,7 +204,7 @@ public class LinkedList<E> {
 
     public E deleteFirst() throws ListEmptyException {
         if (isEmpty()) {
-            throw new ListEmptyException("Lista vacia");
+            throw new ListEmptyException("La lista esta vacia");
         } else {
             E element = header.getInfo();
             Node<E> aux = header.getNext();
@@ -223,7 +219,7 @@ public class LinkedList<E> {
 
     public E deleteLast() throws ListEmptyException {
         if (isEmpty()) {
-            throw new ListEmptyException("Lista vacia");
+            throw new ListEmptyException("La lista se encuentra vacia");
         } else {
             E element = last.getInfo();
             Node<E> aux = getNode(size - 2);
@@ -248,46 +244,6 @@ public class LinkedList<E> {
         return this.size.intValue();
     }
 
-    protected void removeLast() throws ListEmptyException {
-        if (isEmpty()) {
-            throw new ListEmptyException("Error, no puede eliminar datos de una lista vacia.");
-        } else {
-            Node<E> nodo_last = getNode((getLength() - 2));
-            nodo_last.setNext(null);
-            this.last = nodo_last;
-            this.size--;
-        }
-    }
-
-    public void removeFirst() throws ListEmptyException {
-        if (isEmpty()) {
-            throw new ListEmptyException("Error, no puede eliminar datos de una lista vacia.");
-        } else {
-            Node<E> help = this.header;
-            Node<E> nextHeader = help.getNext();
-            this.header = nextHeader;
-            this.size--;
-        }
-    }
-
-    public void remove(int index) throws ListEmptyException, IndexOutOfBoundsException {
-        if (isEmpty()) {
-            throw new ListEmptyException("Lista vacia, no puede eliminar elementos");
-        } else if (index < 0 || index >= this.size) {
-            throw new IndexOutOfBoundsException("Índice fuera de límites: " + index);
-        } else if (index == 0) {
-            removeFirst();
-        } else if (index == (this.size - 1)) {
-            removeLast();
-        } else {
-            Node<E> nodoDeath = getNode(index);
-            Node<E> previousNode = getNode(index - 1);
-            previousNode.setNext(nodoDeath.getNext());
-            this.size--;
-        }
-
-    }
-
     public E delete(Integer post) throws ListEmptyException {
         if (isEmpty()) {
             throw new ListEmptyException("Error, la lista esta vacia");
@@ -309,156 +265,151 @@ public class LinkedList<E> {
         }
     }
 
-    public LinkedList<E> order(String attribute, Integer type) throws Exception {
+    public LinkedList<E> order(String atributo, Integer type) throws Exception {
         if (!isEmpty()) {
             E data = this.header.getInfo();
             if (data instanceof Object) {
                 E[] lista = this.toArray();
                 reset();
                 for (int i = 1; i < lista.length; i++) {
-                    E aux = lista[i]; // valor a ordenar
-                    int j = i - 1; // índice anterior
-                    while (j >= 0 && atrribute_compare(attribute, lista[j], aux, type)) {
-                        lista[j + 1] = lista[j--]; // desplaza elementos hacia la derecha
+                    E aux = lista[i]; 
+                    int j = i - 1; 
+                    while (j >= 0 && atributoComp(atributo, lista[j], aux, type)) {
+                        lista[j + 1] = lista[j--]; 
                     }
-                    lista[j + 1] = aux; // inserta el valor en su posición correcta
+                    lista[j + 1] = aux; 
                 }
                 this.toList(lista);
             }
         }
         return this;
     }
-
+    //-----------Compare--------------/
     private Boolean compare(Object a, Object b, Integer type) {
-        switch (type) {
-            case 0:
-                if (a instanceof Number) {
-                    Number a1 = (Number) a;
-                    Number b1 = (Number) b;
-                    return a1.doubleValue() > b1.doubleValue();
-                } else {
-                    return (a.toString()).compareTo(b.toString()) > 0;
-                }
-                // break;
-            default:
-                // mayor a menor
-                if (a instanceof Number) {
-                    Number a1 = (Number) a;
-                    Number b1 = (Number) b;
-                    return a1.doubleValue() < b1.doubleValue();
-                } else {
-                    return (a.toString()).compareTo(b.toString()) < 0;
-                }
-                // break;
+        boolean isTypeZero = type == 0;
+    
+        if (a instanceof Number) {
+            Number a1 = (Number) a;
+            Number b1 = (Number) b;
+            return isTypeZero ? a1.doubleValue() > b1.doubleValue() : a1.doubleValue() < b1.doubleValue();
+        } else {
+            int comparison = a.toString().compareTo(b.toString());
+            return isTypeZero ? comparison > 0 : comparison < 0;
         }
+    }
+    
 
+    private Boolean atributoComp(String atributo, E a, E b, Integer type) throws Exception {
+        return compare(atributoExis(a, atributo), atributoExis(b, atributo), type);
     }
 
-    // compare class
-    private Boolean atrribute_compare(String attribute, E a, E b, Integer type) throws Exception {
-        return compare(exist_attribute(a, attribute), exist_attribute(b, attribute), type);
-    }
-
-    private Object exist_attribute(E a, String attribute) throws Exception {
+    private Object atributoExis(E a, String atributo) throws Exception {
+        if (atributo == null || atributo.isEmpty()) {
+            throw new IllegalArgumentException("El atributo no puede estar vacío o nulo.");
+        }
+    
+        String metodoNombre = "get" + atributo.substring(0, 1).toUpperCase() + atributo.substring(1);
         Method method = null;
-        attribute = attribute.substring(0, 1).toUpperCase() + attribute.substring(1);
-        attribute = "get" + attribute;
+    
         for (Method aux : a.getClass().getMethods()) {
-            if (aux.getName().contains(attribute)) {
+            if (aux.getName().equals(metodoNombre)) {
                 method = aux;
                 break;
             }
         }
+    
         if (method == null) {
             for (Method aux : a.getClass().getSuperclass().getMethods()) {
-                if (aux.getName().contains(attribute)) {
+                if (aux.getName().equals(metodoNombre)) {
                     method = aux;
                     break;
                 }
             }
         }
+    
         if (method != null) {
             return method.invoke(a);
         }
-
-        return null;
+    
+        throw new NoSuchMethodException("El método " + metodoNombre + " no se encontró en la clase " + a.getClass().getName());
     }
+    
 
-    //Metodo de ordenacion quicksort
+    //Metodo de ordenacion QuikShor
 
-    public LinkedList<E> quicksort(int orderType) throws Exception {
+    public LinkedList<E> QuikShor(int orderType) throws Exception {
         if (!isEmpty()) {
             E[] lista = this.toArray();
             reset();
-            quicksortHelper(lista, 0, lista.length - 1, orderType);
+            QuikShorHp(lista, 0, lista.length - 1, orderType);
             this.toList(lista);
         }
         return this;
     }
 
-    private void quicksortHelper(E[] lista, int low, int high, int orderType) throws Exception {
-        if (low < high) {
-            int pi = partition(lista, low, high, orderType);
-            quicksortHelper(lista, low, pi - 1, orderType);
-            quicksortHelper(lista, pi + 1, high, orderType);
+    private void QuikShorHp(E[] lista, int bj, int alt, int orderType) throws Exception {
+        if (bj < alt) {
+            int PI = particion(lista, bj, alt, orderType);
+            QuikShorHp(lista, bj, PI - 1, orderType);
+            QuikShorHp(lista, PI + 1, alt, orderType);
         }
     }
 
-    private int partition(E[] lista, int low, int high, int orderType) throws Exception {
-        E pivot = lista[high];
-        int i = (low - 1); // Indice del elemento más pequeño
+    private int particion(E[] lista, int bj, int alt, int orderType) throws Exception {
+        E pibote = lista[alt];
+        int i = (bj - 1); // Indice del elemento más pequeño
 
-        for (int j = low; j < high; j++) {
-            if (compare(lista[j], pivot, orderType)) {
+        for (int j = bj; j < alt; j++) {
+            if (compare(lista[j], pibote, orderType)) {
                 i++;
-                E temp = lista[i];
+                E aux = lista[i];
                 lista[i] = lista[j];
-                lista[j] = temp;
+                lista[j] = aux;
             }
         }
 
-        E temp = lista[i + 1];
-        lista[i + 1] = lista[high];
-        lista[high] = temp;
+        E aux = lista[i + 1];
+        lista[i + 1] = lista[alt];
+        lista[alt] = aux;
 
         return i + 1;
     }
 
-    public LinkedList<E> quicksort(String attribute, Integer type) throws Exception {
+    public LinkedList<E> QuikShor(String atributo, Integer type) throws Exception {
         if (!isEmpty()) {
             E[] lista = this.toArray();
             reset();
-            quicksortHelperAttribute(lista, 0, lista.length - 1, attribute, type);
+            QuikShorHpAtb(lista, 0, lista.length - 1, atributo, type);
             this.toList(lista);
         }
         return this;
     }
 
-    private void quicksortHelperAttribute(E[] lista, int low, int high, String attribute, Integer type)
+    private void QuikShorHpAtb(E[] lista, int bj, int alt, String atributo, Integer type)
             throws Exception {
-        if (low < high) {
-            int pi = partitionAttribute(lista, low, high, attribute, type);
-            quicksortHelperAttribute(lista, low, pi - 1, attribute, type);
-            quicksortHelperAttribute(lista, pi + 1, high, attribute, type);
+        if (bj < alt) {
+            int PI = partAtb(lista, bj, alt, atributo, type);
+            QuikShorHpAtb(lista, bj, PI - 1, atributo, type);
+            QuikShorHpAtb(lista, PI + 1, alt, atributo, type);
         }
     }
 
-    private int partitionAttribute(E[] lista, int low, int high, String attribute, Integer type) throws Exception {
-        E pivot = lista[high];
-        int i = (low - 1); // Indice del elemento más pequeño
+    private int partAtb(E[] lista, int bj, int alt, String atributo, Integer type) throws Exception {
+        E pibote = lista[alt];
+        int i = (bj - 1); // Indice del elemento más pequeño
 
-        for (int j = low; j < high; j++) {
-            if (atrribute_compare(attribute, lista[j], pivot, type)) {
+        for (int j = bj; j < alt; j++) {
+            if (atributoComp(atributo, lista[j], pibote, type)) {
                 i++;
-                E temp = lista[i];
+                E aux = lista[i];
                 lista[i] = lista[j];
-                lista[j] = temp;
+                lista[j] = aux;
             }
         }
 
-        E temp = lista[i + 1];
-        lista[i + 1] = lista[high];
-        lista[high] = temp;
+        E aux = lista[i + 1];
+        lista[i + 1] = lista[alt];
+        lista[alt] = aux;
 
         return i + 1;
     }
@@ -468,112 +419,112 @@ public class LinkedList<E> {
         if (!isEmpty()) {
             E[] lista = this.toArray();
             reset();
-            lista = mergesortHelper(lista, orderType);
+            lista = mergesortHp(lista, orderType);
             this.toList(lista);
         }
         return this;
     }
 
-    private E[] mergesortHelper(E[] lista, int orderType) throws Exception {
+    private E[] mergesortHp(E[] lista, int orderType) throws Exception {
         if (lista.length <= 1) {
             return lista;
         }
 
-        int middle = lista.length / 2;
-        E[] left = Arrays.copyOfRange(lista, 0, middle);
-        E[] right = Arrays.copyOfRange(lista, middle, lista.length);
+        int aux = lista.length / 2;
+        E[] izq = Arrays.copyOfRange(lista, 0, aux);
+        E[] der = Arrays.copyOfRange(lista, aux, lista.length);
 
-        left = mergesortHelper(left, orderType);
-        right = mergesortHelper(right, orderType);
+        izq = mergesortHp(izq, orderType);
+        der = mergesortHp(der, orderType);
 
-        return merge(left, right, orderType);
+        return merge(izq, der, orderType);
     }
 
-    private E[] merge(E[] left, E[] right, int orderType) throws Exception {
-        E[] result = (E[]) new Object[left.length + right.length];
+    private E[] merge(E[] izq, E[] der, int orderType) throws Exception {
+        E[] result = (E[]) new Object[izq.length + der.length];
         int i = 0, j = 0, k = 0;
 
-        while (i < left.length && j < right.length) {
-            if (compare(left[i], right[j], orderType)) {
-                result[k++] = left[i++];
+        while (i < izq.length && j < der.length) {
+            if (compare(izq[i], der[j], orderType)) {
+                result[k++] = izq[i++];
             } else {
-                result[k++] = right[j++];
+                result[k++] = der[j++];
             }
         }
 
-        while (i < left.length) {
-            result[k++] = left[i++];
+        while (i < izq.length) {
+            result[k++] = izq[i++];
         }
 
-        while (j < right.length) {
-            result[k++] = right[j++];
+        while (j < der.length) {
+            result[k++] = der[j++];
         }
 
         return result;
     }
 
-    public LinkedList<E> mergesort(String attribute, Integer type) throws Exception {
+    public LinkedList<E> mergesort(String atributo, Integer type) throws Exception {
         if (!isEmpty()) {
             E[] lista = this.toArray();
             reset();
-            lista = mergesortHelperAttribute(lista, attribute, type);
+            lista = mergesortHpAtb(lista, atributo, type);
             this.toList(lista);
         }
         return this;
     }
 
-    private E[] mergesortHelperAttribute(E[] lista, String attribute, Integer type) throws Exception {
+    private E[] mergesortHpAtb(E[] lista, String atributo, Integer type) throws Exception {
         if (lista.length <= 1) {
             return lista;
         }
 
-        int middle = lista.length / 2;
-        E[] left = Arrays.copyOfRange(lista, 0, middle);
-        E[] right = Arrays.copyOfRange(lista, middle, lista.length);
+        int aux = lista.length / 2;
+        E[] izq = Arrays.copyOfRange(lista, 0, aux);
+        E[] der = Arrays.copyOfRange(lista, aux, lista.length);
 
-        left = mergesortHelperAttribute(left, attribute, type);
-        right = mergesortHelperAttribute(right, attribute, type);
+        izq = mergesortHpAtb(izq, atributo, type);
+        der = mergesortHpAtb(der, atributo, type);
 
-        return mergeAttribute(left, right, attribute, type);
+        return mergeAtb(izq, der, atributo, type);
     }
 
-    private E[] mergeAttribute(E[] left, E[] right, String attribute, Integer type) throws Exception {
-        E[] result = (E[]) new Object[left.length + right.length];
+    private E[] mergeAtb(E[] izq, E[] der, String atributo, Integer type) throws Exception {
+        E[] result = (E[]) new Object[izq.length + der.length];
         int i = 0, j = 0, k = 0;
 
-        while (i < left.length && j < right.length) {
-            if (atrribute_compare(attribute, left[i], right[j], type)) {
-                result[k++] = left[i++];
+        while (i < izq.length && j < der.length) {
+            if (atributoComp(atributo, izq[i], der[j], type)) {
+                result[k++] = izq[i++];
             } else {
-                result[k++] = right[j++];
+                result[k++] = der[j++];
             }
         }
 
-        while (i < left.length) {
-            result[k++] = left[i++];
+        while (i < izq.length) {
+            result[k++] = izq[i++];
         }
 
-        while (j < right.length) {
-            result[k++] = right[j++];
+        while (j < der.length) {
+            result[k++] = der[j++];
         }
 
         return result;
     }
 
     // Metodo de ordenaamiento shell sort
-    public LinkedList<E> shellsort(String attribute, Integer orderType) throws Exception {
+    public LinkedList<E> shellSort(int orderType) throws Exception {
         if (!isEmpty()) {
             E[] lista = this.toArray();
             reset();
             int n = lista.length;
-            for (int gap = n / 2; gap > 0; gap /= 2) {
-                for (int i = gap; i < n; i++) {
-                    E temp = lista[i];
+            for (int vid = n / 2; vid > 0; vid /= 2) {
+                for (int i = vid; i < n; i++) {
+                    E aux = lista[i];
                     int j;
-                    for (j = i; j >= gap && compare(lista[j - gap], temp, orderType); j -= gap) {
-                        lista[j] = lista[j - gap];
+                    for (j = i; j >= vid && compare(lista[j - vid], aux, orderType); j -= vid) {
+                        lista[j] = lista[j - vid];
                     }
-                    lista[j] = temp;
+                    lista[j] = aux;
                 }
             }
             this.toList(lista);
@@ -581,22 +532,22 @@ public class LinkedList<E> {
         return this;
     }
 
-    public LinkedList<E> shellSort(String attribute, Integer type) throws Exception {
+    public LinkedList<E> shellSort(String atributo, Integer type) throws Exception {
         if (!isEmpty()) {
             E[] lista = this.toArray(); // Convertir la lista enlazada a un array
             int n = lista.length;
 
             // Inicialización del intervalo de Shell Sort
-            for (int gap = n / 2; gap > 0; gap /= 2) {
-                for (int i = gap; i < n; i++) {
-                    E temp = lista[i];
+            for (int vid = n / 2; vid > 0; vid /= 2) {
+                for (int i = vid; i < n; i++) {
+                    E aux = lista[i];
                     int j;
 
                     // Comparar elementos en el intervalo
-                    for (j = i; j >= gap && atrribute_compare(attribute, lista[j - gap], temp, type); j -= gap) {
-                        lista[j] = lista[j - gap];
+                    for (j = i; j >= vid && atributoComp(atributo, lista[j - vid], aux, type); j -= vid) {
+                        lista[j] = lista[j - vid];
                     }
-                    lista[j] = temp;
+                    lista[j] = aux;
                 }
             }
 

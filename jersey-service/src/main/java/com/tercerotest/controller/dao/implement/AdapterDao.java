@@ -98,7 +98,7 @@ public class AdapterDao<T> implements IntefazDao<T> {
 
     public Boolean supreme(int index) throws Exception {
         LinkedList<T> list = listAll(); //Invoca el método listAll() para obtener la lista de objetos
-        list.remove(index); //Elimina el objeto en la posición index
+        list.delete(index); //Elimina el objeto en la posición index
         String info = g.toJson(list.toArray()); //Convierte la lista en un String JSON
         saveFile(info); //Guarda el String JSON en un archivo
         return true; //Retorna verdadero si se eliminó correctamente
