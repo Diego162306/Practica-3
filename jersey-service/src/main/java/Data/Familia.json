@@ -1,92 +1,107 @@
 [
     {
-        "idFamilia": 1,
-        "apellidoFamilia": "Perez",
-        "direccion": "Loja",
-        "HCpdGnrd": false
+        "idFamilia": 8,
+        "apellidoFamilia": "Gonzalez",
+        "direccion": "Ambato",
+        "telefono": "0991234567",
+        "hcpdGnrd": true
     },
     {
         "idFamilia": 2,
         "apellidoFamilia": "Riofrio",
         "direccion": "Catamayo",
-        "HCpdGnrd": false
-    },
-    {
-        "idFamilia": 3,
-        "apellidoFamilia": "Velez",
-        "direccion": "Loja",
-        "HCpdGnrd": true
-    },
-    {
-        "idFamilia": 4,
-        "apellidoFamilia": "Vidal",
-        "direccion": "Loja",
-        "HCpdGnrd": false
+        "telefono": "0987654321",
+        "hcpdGnrd": false
     },
     {
         "idFamilia": 5,
         "apellidoFamilia": "Veintimilla",
         "direccion": "Catamayo",
-        "HCpdGnrd": false
-    },
-    {
-        "idFamilia": 6,
-        "apellidoFamilia": "Castillo",
-        "direccion": "Quito",
-        "HCpdGnrd": true
+        "telefono": "0976543210",
+        "hcpdGnrd": false
     },
     {
         "idFamilia": 7,
         "apellidoFamilia": "Moreno",
         "direccion": "Cuenca",
-        "HCpdGnrd": false
-    },
-    {
-        "idFamilia": 8,
-        "apellidoFamilia": "Gonzalez",
-        "direccion": "Ambato",
-        "HCpdGnrd": true
-    },
-    {
-        "idFamilia": 9,
-        "apellidoFamilia": "Lopez",
-        "direccion": "Machala",
-        "HCpdGnrd": false
+        "telefono": "0965432109",
+        "hcpdGnrd": false
     },
     {
         "idFamilia": 10,
         "apellidoFamilia": "Sanchez",
         "direccion": "Guayaquil",
-        "HCpdGnrd": true
-    },
-    {
-        "idFamilia": 11,
-        "apellidoFamilia": "Rodriguez",
-        "direccion": "Portoviejo",
-        "HCpdGnrd": false
+        "telefono": "0954321098",
+        "hcpdGnrd": true
     },
     {
         "idFamilia": 12,
         "apellidoFamilia": "Torres",
         "direccion": "Loja",
-        "HCpdGnrd": true
+        "telefono": "0943210987",
+        "hcpdGnrd": true
     },
     {
-        "idFamilia": 13,
-        "apellidoFamilia": "Martinez",
-        "direccion": "Quito",
-        "HCpdGnrd": false
+        "idFamilia": 3,
+        "apellidoFamilia": "Velez",
+        "direccion": "Loja",
+        "telefono": "0932109876",
+        "hcpdGnrd": true
     },
     {
-        "idFamilia": 14,
-        "apellidoFamilia": "Fernandez",
-        "direccion": "Tulcan",
-        "HCpdGnrd": true
+        "idFamilia": 4,
+        "apellidoFamilia": "Vidal",
+        "direccion": "Loja",
+        "telefono": "0921098765",
+        "hcpdGnrd": false
+    },
+    {
+        "idFamilia": 1,
+        "apellidoFamilia": "Perez",
+        "direccion": "Loja",
+        "telefono": "0910987654",
+        "hcpdGnrd": false
+    },
+    {
+        "idFamilia": 9,
+        "apellidoFamilia": "Lopez",
+        "direccion": "Machala",
+        "telefono": "0998765432",
+        "hcpdGnrd": false
     },
     {
         "idFamilia": 15,
         "apellidoFamilia": "Jimenez",
         "direccion": "Manta",
-        "HCpdGnrd": false
+        "telefono": "0986543211",
+        "hcpdGnrd": false
+    },
+    {
+        "idFamilia": 11,
+        "apellidoFamilia": "Rodriguez",
+        "direccion": "Portoviejo",
+        "telefono": "0975432110",
+        "hcpdGnrd": false
+    },
+    {
+        "idFamilia": 6,
+        "apellidoFamilia": "Castillo",
+        "direccion": "Quito",
+        "telefono": "0964321109",
+        "hcpdGnrd": true
+    },
+    {
+        "idFamilia": 13,
+        "apellidoFamilia": "Martinez",
+        "direccion": "Quito",
+        "telefono": "0953211098",
+        "hcpdGnrd": false
+    },
+    {
+        "idFamilia": 14,
+        "apellidoFamilia": "Fernandez",
+        "direccion": "Tulcan",
+        "telefono": "0942109876",
+        "hcpdGnrd": true
     }
 ]

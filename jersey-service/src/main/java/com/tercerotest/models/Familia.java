@@ -1,17 +1,19 @@
 package com.tercerotest.models;
 
 public class Familia {
-    private int idFamilia;
+    private Integer idFamilia;
     private String apellidoFamilia;
     private String direccion;
+    private String telefono;
     private Boolean HCpdGnrd; //Ha comprado Gnerador
     
     // Constructor
-    public Familia(int idFamilia, String apellidoFamilia, String direccion, Boolean HCpdGnrd) {
+    public Familia(Integer idFamilia, String apellidoFamilia, String direccion, Boolean HCpdGnrd) {
         this.idFamilia = idFamilia;
         this.apellidoFamilia = apellidoFamilia;
         this.direccion = direccion;
         this.HCpdGnrd = HCpdGnrd;
+        this.telefono = telefono;
     }
 
     public Familia() {
@@ -22,7 +24,7 @@ public class Familia {
         return idFamilia;
     }
 
-    public void setIdFamilia(int idFamilia) {
+    public void setIdFamilia(Integer idFamilia) {
         this.idFamilia = idFamilia;
     }
 
@@ -48,6 +50,14 @@ public class Familia {
 
     public void setHCpdGnrd(Boolean HCpdGnrd) {
         this.HCpdGnrd = HCpdGnrd;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono){
+        this.telefono = telefono;
     }
 
     @Override

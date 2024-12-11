@@ -28,6 +28,11 @@
 
     <link href="{{ url_for('static', filename='css/sb-admin-2.css') }}" rel="stylesheet">
 
+    <!-- nuevos url -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sb-admin-2.min.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 </head>
 
 <body id="page-top">
@@ -36,7 +41,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        
+
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -102,10 +107,10 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Juan Veintmilla</span>
-                                
+
                             </a>
                             <!-- Dropdown - User Information -->
-                            
+
                         </li>
 
                     </ul>
@@ -117,7 +122,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tabla</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Tabla Familias</h1>
                     <p class="mb-4">Algoritmos de ordenación Quicksort, mergesort y shellsort <a target="_blank"></p>
 
                     <!-- DataTales Example -->
@@ -126,61 +131,78 @@
                             <h6 class="m-0 font-weight-bold text-primary">Familias</h6>
                         </div>
                         <div class="control-panel">
-                            <div class="selectors">
-                              <label for="order-by">Ordenar por:</label>
-                              <select id="order-by">
-                                <option value="apellido">Apellido</option>
-                                <option value="direccion">Dirección</option>
-                              </select>
-                          
-                              <label for="sort-method">Método:</label>
-                              <select id="sort-method">
-                                <option value="quicksort">Quick Sort</option>
-                                <option value="mergesort">Merge Sort</option>
-                                <option value="shellsort">Shell Sort</option>
-                              </select>
-                          
-                              <button class="btn-ordenar">Ordenar</button>
-                            </div>
-                          
-                            <div class="search-panel">
-                              <label for="search-by">Buscar por:</label>
-                              <select id="search-by">
-                                <option value="apellido">Apellido</option>
-                                <option value="direccion">Dirección</option>
-                              </select>
-                          
-                              <input type="text" id="search-input" placeholder="Escriba su búsqueda..." />
-                              <button class="btn-buscar">Buscar</button>
-                            </div>
-                          </div>
-                          
+                            <form method="GET" action="/familia/list">
+                                <label for="order-by">Ordenar por:</label>
+                                <select name="atributo" id="order-by">
+                                    <option value="apellido">Apellido</option>
+                                    <option value="direccion">Dirección</option>
+                                    <option value="telefono">Teléfono</option>
+                                </select>
+
+                                <label for="sort-method">Método:</label>
+                                <select name="metodo" id="sort-method">
+                                    <option value="OrderQuick">Quick Sort</option>
+                                    <option value="OrderMer">Merge Sort</option>
+                                    <option value="OrderShell">Shell Sort</option>
+                                </select>
+
+                                <label for="order-type">Tipo de orden:</label>
+                                <select name="tipo" id="order-type">
+                                    <option value="0">Ascendente</option>
+                                    <option value="1">Descendente</option>
+                                </select>
+
+                                <button class="btn-ordenar">Ordenar</button>
+                            </form>
+
+                            <form method="GET" action="/familia/search">
+                                <label for="search-by">Buscar por:</label>
+                                <select name="criterio" id="search-by">
+                                    <option value="apellido">Apellido</option>
+                                    <option value="direccion">Dirección</option>
+                                    <option value="telefono">Teléfono</option>
+                                </select>
+                            
+                                <label for="search-type">Método de búsqueda:</label>
+                                <select name="tipo" id="search-type">
+                                    <option value="normal">Normal</option>
+                                    <option value="lineal">Lineal</option>
+                                    <option value="binario">Binario</option>
+                                </select>
+                            
+                                <input type="text" name="texto" id="search-input" placeholder="Escriba su búsqueda..." required />
+                                <button class="btn-buscar">Buscar</button>
+                            </form>
+                            
+
+                        </div>
+
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table">
                                     <thead>
                                         <tr>
                                             <th>Apellido</th>
-                                            <th>Direccion</th>
-                                            <th>Tiene generador</th>
+                                            <th>Dirección</th>
+                                            <th>Teléfono</th>
+                                            <th>Tiene Generador</th>
                                         </tr>
                                     </thead>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot> -->
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                        </tr>
+                                        {% if listaFamilia %}
+                                            {% for familia in listaFamilia %}
+                                                <tr>
+                                                    <td>{{ familia.apellidoFamilia }}</td>
+                                                    <td>{{ familia.direccion }}</td>
+                                                    <td>{{ familia.telefono }}</td>
+                                                    <td>{{ "Sí" if familia.hcpdGnrd else "No" }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="4">No se encontraron resultados.</td>
+                                            </tr>
+                                        {% endif %}
                                     </tbody>
                                 </table>
                             </div>
@@ -213,26 +235,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

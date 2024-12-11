@@ -19,6 +19,10 @@ public class FamiliaServices {
         return obj.update();
     }
 
+    public Boolean delete(int index) throws Exception {
+        return obj.delete(index);
+    }
+
     public LinkedList listAll() {
         return obj.getListAll();
     }
@@ -31,10 +35,6 @@ public class FamiliaServices {
         obj.setFamilia(Familia);
     }
 
-    public Boolean delete(int index) throws Exception {
-        return obj.delete(index);
-    }
-
     public Familia get(Integer id) throws Exception {
         return obj.get(id);
     }
@@ -43,11 +43,16 @@ public class FamiliaServices {
         return obj.listAll().order(atributo, type);
     }
 
-    public LinkedList buscar_APellidoFamiila(String texto) {
-        return obj.buscar_APellidoFamiila(texto);
+    public LinkedList<Familia> buscarAPellidoFamiila(String texto) {
+        return obj.buscarAPellidoFamiila(texto);
     }
+
     public LinkedList<Familia> buscarDireccion(String texto) {
         return obj.buscarDireccion(texto);
+    }
+
+    public LinkedList<Familia> buscarTelefonno(String texto) {
+        return obj.buscarTelefonno(texto);
     }
 
     public LinkedList OrderMetQuick(Integer type_order, String atributo) {
@@ -67,7 +72,7 @@ public class FamiliaServices {
     }
 
     public LinkedList<Familia> BuscarApellidoBinario(String texto) {
-        return obj.BuscarApellidoBinario(texto);
+        return obj.buscarApellidoBinario(texto);
     }
 
     public LinkedList<Familia> BuscarDireccionFamiliaLineal(String texto) {
@@ -75,7 +80,14 @@ public class FamiliaServices {
     }
 
     public LinkedList<Familia> BuscarDireccionFamiliaBinario(String texto) {
-        return obj.BuscarDireccionFamiliaBinario(texto);
+        return obj.buscarDireccionFamiliaBinario(texto);
     }
 
+    public LinkedList<Familia> BusquedaTelefonoFamiliaLineal(String texto) {
+        return obj.BusquedaTelefonoFamiliaLineal(texto);
+    }
+
+    public LinkedList<Familia> BusquedaTelefonoFamiliaBinario(String texto) {
+        return obj.buscarTelefonoFamiliaBinario(texto);
+    }
 }

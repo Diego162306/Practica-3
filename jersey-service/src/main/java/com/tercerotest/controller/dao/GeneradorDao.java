@@ -48,10 +48,10 @@ public class GeneradorDao extends AdapterDao<Generador> {
         return true;
     }
 
-    public Boolean delete(int index) throws Exception { //Elimina un objeto Familia por su índice
+    public Boolean delete(int index) throws Exception { 
         this.supreme(index);
-        this.listAll = listAll(); // Actualiza la lista de objetos
-        return true; // Retorna verdadero si se eliminó correctamente
+        this.listAll = listAll(); 
+        return true; 
     }
 
 }
